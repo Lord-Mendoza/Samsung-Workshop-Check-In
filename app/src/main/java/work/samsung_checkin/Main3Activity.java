@@ -75,7 +75,7 @@ public class Main3Activity extends AppCompatActivity
             String task = c.getString(1);
             //Removes the entries from the database
             db = dbHelper.getWritableDatabase();
-            db.delete(dbHelper.TABLENAME, NAME + "=?", new String[] {task});
+            db.execSQL("delete from "+ dbHelper.TABLENAME);
         }
 
         //Allows for changes to be reflected
