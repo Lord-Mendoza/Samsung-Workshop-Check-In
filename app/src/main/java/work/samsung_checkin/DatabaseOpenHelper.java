@@ -25,10 +25,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL(CREATE_CMD);
-        ContentValues values = new ContentValues();
-        values.put(NAME, "John Doe | sample@email.com");
-
-        db.insert(TABLENAME, null, values);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}

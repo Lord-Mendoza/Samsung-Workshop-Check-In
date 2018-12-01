@@ -45,7 +45,7 @@
         android:layout_marginBottom="98dp"
         android:ems="10"
         android:hint="John Doe"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/eTxt_Email"
         app:layout_constraintEnd_toEndOf="parent"
