@@ -1,4 +1,4 @@
-package work.samsung_checkin;
+package samsung.samsung_checkin;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -14,8 +14,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static work.samsung_checkin.MainActivity.NAME;
-import static work.samsung_checkin.MainActivity._ID;
+import static samsung.samsung_checkin.MainActivity.NAME;
+import static samsung.samsung_checkin.MainActivity._ID;
 
 public class Main3Activity extends AppCompatActivity
 {

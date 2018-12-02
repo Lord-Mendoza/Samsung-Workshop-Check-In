@@ -1,4 +1,4 @@
-package work.samsung_checkin;
+package samsung.samsung_checkin;
 
 import android.content.ContentValues;
 import android.content.Intent;

@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "work.samsung_checkin"
+        applicationId "samsung.samsung_checkin"
         minSdkVersion 21
         targetSdkVersion 28
-        versionName '2'
+        versionName '1.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 2
+        versionCode 1
     }
     buildTypes {
         release {

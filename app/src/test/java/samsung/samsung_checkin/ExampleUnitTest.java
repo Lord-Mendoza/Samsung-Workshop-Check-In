@@ -1,4 +1,4 @@
-package work.samsung_checkin;
+package samsung.samsung_checkin;
 
 import org.junit.Test;
 
