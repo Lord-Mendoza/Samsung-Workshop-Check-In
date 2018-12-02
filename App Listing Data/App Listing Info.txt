@@ -1,0 +1,26 @@
+Workshop Check-in
+
+A client-tracking tool for Samsung Experience Consultants
+
+This simple application can be used to track clients that are assisted everyday to count as credit towards your workshop. It offers compatibility between larger screen size phones as well as tablets. 
+
+To get started, simply have the client enter their name and their email address. Next, when they click submit, their information are stored to the local database (within the device used). The page will automatically refresh after ten seconds.
+
+To access the client information for later submission in our workshop forms, click on the Samsung logo seven times to get a list view of acquired information. A handy clear list button will be available for resetting the list afterwards.
+
+I hope you'll find this nifty tool useful for when you interact with clients, so that you can later receive feedback on how well you helped them!
+
+DISCLAIMERS: 
+I reserve all rights to Samsung for the usage of the logo. 
+Any privacy issues that may come about is in the responsibility of the Consultant. They are responsible for ensuring that the client's data secure, and clear their local databases after inputting the retrieved data to the workshop system.This simple application can be used to track clients that are assisted everyday to count as credit towards your workshop. It offers compatibility between larger screen size phones as well as tablets. 
+
+To get started, simply have the client enter their name and their email address. Next, when they click submit, their information are stored to the local database (within the device used). The page will automatically refresh after ten seconds.
+
+To access the client information for later submission in our workshop forms, click on the Samsung logo seven times to get a list view of acquired information. A handy clear list button will be available for resetting the list afterwards.
+
+I hope you'll find this nifty tool useful for when you interact with clients, so that you can later receive feedback on how well you helped them!
+
+DISCLAIMERS: 
+I reserve all rights to Samsung for the usage of the logo. 
+Any privacy issues that may come about is in the responsibility of the Consultant. They are responsible for ensuring that the client's data secure, and clear their local databases after inputting the retrieved data to the workshop system.
+
