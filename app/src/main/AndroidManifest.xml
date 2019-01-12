@@ -11,15 +11,19 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="samsung.samsung_checkin.MainActivity"
-            android:label="Check In">
+            android:label="Check In"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="samsung.samsung_checkin.Main2Activity" />
-        <activity android:name="samsung.samsung_checkin.Main3Activity"></activity>
+        <activity android:name="samsung.samsung_checkin.Main2Activity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name="samsung.samsung_checkin.Main3Activity"
+                  android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
