@@ -1,3 +1,8 @@
+/*
+Lord Mendoza
+
+For accessing the SQLite database
+ */
 package samsung.samsung_checkin;
 
 import android.content.Context;
@@ -6,11 +11,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper
 {
+    //Database-related variables
     final static String TABLENAME = "checkInList";
     final private static String CREATE_CMD =
                 "CREATE TABLE " + TABLENAME + " (" + MainActivity._ID +
                         " INTEGER PRIMARY KEY AUTOINCREMENT, " + MainActivity.NAME + " TEXT NOT NULL )";
-
     final private static Integer VERSION = 1;
     final private Context context;
 
@@ -20,6 +25,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper
         this.context = context;
     }
 
+    //Creating the database table
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL(CREATE_CMD);

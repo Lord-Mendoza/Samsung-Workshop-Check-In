@@ -6,9 +6,9 @@ android {
         applicationId "samsung.samsung_checkin"
         minSdkVersion 21
         targetSdkVersion 28
-        versionName '1.1'
+        versionName '1.2'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 101
+        versionCode 102
     }
     buildTypes {
         release {

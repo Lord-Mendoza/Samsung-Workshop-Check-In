@@ -1,3 +1,10 @@
+/*
+Lord Mendoza
+
+The following class is in charge of handling SEC interactions on the client list, including copying
+email addresses, and clearing the client list.
+ */
+
 package samsung.samsung_checkin;
 
 import android.content.ClipData;
@@ -21,38 +28,64 @@ import static samsung.samsung_checkin.MainActivity._ID;
 
 public class Main3Activity extends AppCompatActivity
 {
+    //Database-related variables
     final static String[] all_columns = {_ID, NAME};
     private SQLiteDatabase db = null;
     private DatabaseOpenHelper dbHelper = null;
+
+    //Listview-related variables for displaying the results from the database
     SimpleCursorAdapter myAdapter;
     ListView mlist;
     Cursor mCursor;
 
+    //For displaying the confirmation message to user
     private AlertDialog actions;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        //Initializing the database, and setting the listview to the mList variable
         mlist = findViewById(R.id.clientList);
         dbHelper = new DatabaseOpenHelper(this);
     }
 
+    /*
+    For querying all the information from the database and displaying it to the user
+     */
     public void onResume()
     {
         super.onResume();
 
+        //Queries the database
         db = dbHelper.getWritableDatabase();
         mCursor = db.query(dbHelper.TABLENAME, all_columns, null, null, null, null, null);
 
+        //And shows results to SEC
         myAdapter = new SimpleCursorAdapter(this,
                     android.R.layout.simple_list_item_1, mCursor, new String[] {"name"},
                     new int[] { android.R.id.text1 });
-
         mlist.setAdapter(myAdapter);
 
+        //For handling single clicks to a client information; it will copy the name to the clip board
+        mlist.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                String nameCopied = (String) ((TextView) view).getText();
+                nameCopied = nameCopied.substring(nameCopied.indexOf(": ") + 1, nameCopied.indexOf("Em"));
+                nameCopied = nameCopied.replaceFirst("\\s++$", "");
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Client Name", nameCopied);
+                clipboard.setPrimaryClip(clip);
+
+                Toast.makeText(getApplicationContext(), "Name copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //For handling long-clicks to a client information; it will copy the email to the clip board
         mlist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
@@ -70,6 +103,7 @@ public class Main3Activity extends AppCompatActivity
             }
         });
 
+        //For displaying alert message to confirm if user really wants to clear the client list
         DialogInterface.OnClickListener actionListener = new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int which)
