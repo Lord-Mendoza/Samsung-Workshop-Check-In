@@ -3,8 +3,10 @@ package samsung.samsung_checkin;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +27,8 @@ public class Main3Activity extends AppCompatActivity
     SimpleCursorAdapter myAdapter;
     ListView mlist;
     Cursor mCursor;
+
+    private AlertDialog actions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,6 +69,45 @@ public class Main3Activity extends AppCompatActivity
                 return true;
             }
         });
+
+        DialogInterface.OnClickListener actionListener = new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                switch (which)
+                {
+                    case 0:
+                        int len = myAdapter.getCount();
+                        Cursor c = myAdapter.getCursor();
+                        c.moveToFirst();
+
+                        for (int i=len-1;i >= 0;i--)
+                        {
+                            String task = c.getString(1);
+                            //Removes the entries from the database
+                            db = dbHelper.getWritableDatabase();
+                            db.execSQL("delete from "+ dbHelper.TABLENAME);
+                        }
+
+                        //Allows for changes to be reflected
+                        mCursor = db.query(dbHelper.TABLENAME, all_columns, null, null,
+                                null, null, null);
+                        myAdapter.swapCursor(mCursor);
+                        Toast.makeText(getApplicationContext(), "Client list cleared", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
+        //Presents the user with the confirmation message to delete the workout that they long-pressed
+        AlertDialog.Builder builder = new AlertDialog.Builder(Main3Activity.this);
+        builder.setTitle("Are you sure you want to clear the list?");
+        String[] options = {"Confirm"};
+        builder.setItems(options, actionListener);
+        builder.setNegativeButton("Cancel", null);
+        actions = builder.create();
     }
 
     public void onPause()
@@ -75,12 +118,6 @@ public class Main3Activity extends AppCompatActivity
         mCursor.close();
     }
 
-    public void goBack(View view)
-    {
-        setResult(RESULT_OK);
-        finish();
-    }
-
     public void onBackPressed(View view)
     {
         setResult(RESULT_OK);
@@ -89,21 +126,6 @@ public class Main3Activity extends AppCompatActivity
 
     public void clearDatabase(View view)
     {
-        int len = myAdapter.getCount();
-        Cursor c = myAdapter.getCursor();
-        c.moveToFirst();
-
-        for (int i=len-1;i >= 0;i--)
-        {
-            String task = c.getString(1);
-            //Removes the entries from the database
-            db = dbHelper.getWritableDatabase();
-            db.execSQL("delete from "+ dbHelper.TABLENAME);
-        }
-
-        //Allows for changes to be reflected
-        mCursor = db.query(dbHelper.TABLENAME, all_columns, null, null,
-                null, null, null);
-        myAdapter.swapCursor(mCursor);
+        actions.show();
     }
 }

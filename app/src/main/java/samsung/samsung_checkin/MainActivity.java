@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity
     public void secretPage(View view)
     {
         i++;
-        if (i >= 5 && i < 7)
+        if (i >= 3 && i < 5)
         {
-            final Toast toast = Toast.makeText(getApplicationContext(), "Click " + (7 - i) + " more times",
+            final Toast toast = Toast.makeText(getApplicationContext(), "Click " + (5 - i) + " more times",
                     Toast.LENGTH_SHORT);
             toast.show();
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }, 300);
         }
-        else if(i == 7)
+        else if(i == 5)
         {
             i = 0;
             Intent intent = new Intent(this, Main3Activity.class);
