@@ -103,43 +103,34 @@ public class Main3Activity extends AppCompatActivity
             }
         });
 
-        //For displaying alert message to confirm if user really wants to clear the client list
-        DialogInterface.OnClickListener actionListener = new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                switch (which)
-                {
-                    case 0:
-                        int len = myAdapter.getCount();
-                        Cursor c = myAdapter.getCursor();
-                        c.moveToFirst();
 
-                        for (int i=len-1;i >= 0;i--)
-                        {
-                            String task = c.getString(1);
-                            //Removes the entries from the database
-                            db = dbHelper.getWritableDatabase();
-                            db.execSQL("delete from "+ dbHelper.TABLENAME);
-                        }
-
-                        //Allows for changes to be reflected
-                        mCursor = db.query(dbHelper.TABLENAME, all_columns, null, null,
-                                null, null, null);
-                        myAdapter.swapCursor(mCursor);
-                        Toast.makeText(getApplicationContext(), "Client list cleared", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
 
         //Presents the user with the confirmation message to delete the workout that they long-pressed
         AlertDialog.Builder builder = new AlertDialog.Builder(Main3Activity.this);
-        builder.setTitle("Are you sure you want to clear the list?");
-        String[] options = {"Confirm"};
-        builder.setItems(options, actionListener);
+        builder.setTitle("Warning");
+        builder.setMessage("Are you sure you want to clear the list?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                int len = myAdapter.getCount();
+                Cursor c = myAdapter.getCursor();
+                c.moveToFirst();
+
+                for (int i=len-1;i >= 0;i--)
+                {
+                    //Removes the entries from the database
+                    db = dbHelper.getWritableDatabase();
+                    db.execSQL("delete from "+ dbHelper.TABLENAME);
+                }
+
+                //Allows for changes to be reflected
+                mCursor = db.query(dbHelper.TABLENAME, all_columns, null, null,
+                        null, null, null);
+                myAdapter.swapCursor(mCursor);
+                Toast.makeText(getApplicationContext(), "Client list cleared", Toast.LENGTH_SHORT).show();
+            }
+        });
         builder.setNegativeButton("Cancel", null);
         actions = builder.create();
     }
